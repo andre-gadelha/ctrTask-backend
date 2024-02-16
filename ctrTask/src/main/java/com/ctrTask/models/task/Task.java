@@ -1,13 +1,12 @@
-package com.ctrTask.domain.task;
+package com.ctrTask.models.task;
 
+import com.ctrTask.dtos.RequestTask;
 import jakarta.persistence.*;
-import lombok.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import java.util.UUID;
 
 @Table(name="tb_task")
 @Entity(name="tb_task")
