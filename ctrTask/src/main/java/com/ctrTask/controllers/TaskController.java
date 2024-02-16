@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/tasks")
 public class TaskController {
 
@@ -25,12 +26,19 @@ public class TaskController {
         return ResponseEntity.ok(allTasks);
     }
 
-    @PostMapping
+    @PostMapping("/registerTask")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity registerTask(@RequestBody @Valid RequestTask dadosRequest){
         Task newTask = new Task(dadosRequest);
-        repositoty.save(newTask);
-        return ResponseEntity.ok().build();
+
+        if (dadosRequest.name().equals("")) {
+            return ResponseEntity.status(500).body("Falta nome");
+        }else if (dadosRequest.prioridade().equals("")) {
+            return ResponseEntity.status(500).body("Falta prioridade");
+        }else{
+            repositoty.save(newTask);
+            return ResponseEntity.ok("Cadastro ok");
+        }
     }
 
     @PutMapping
